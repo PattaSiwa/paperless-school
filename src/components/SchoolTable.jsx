@@ -27,45 +27,49 @@ const SchoolTable = () => {
     <div>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => {
-                if (column.Header === "Website") {
-                  return (
-                    <th {...column.getHeaderProps()}>
-                      {column.render("Header")}
-                    </th>
-                  );
-                } else {
-                  return (
-                    <th
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {column.render("Header")}
-                      <span>
-                        {column.isSorted
-                          ? column.isSortedDesc
-                            ? "↑"
-                            : "↓"
-                          : ""}
-                      </span>
-                    </th>
-                  );
-                }
-              })}
-              <th>More info</th>
-            </tr>
-          ))}
+          {headerGroups.map(headerGroup => {
+            const {key, ...headerGroups} = headerGroup.getHeaderGroupProps();
+            return (
+              <tr key={key} {...headerGroups}>
+                {headerGroup.headers.map(column => {
+                  const {key, ...restColumn} = column.getHeaderProps();
+                  if (column.Header === "Website") {
+                    return (
+                      <th key={key} {...restColumn}>
+                        {column.render("Header")}
+                      </th>
+                    );
+                  } else {
+                    return (
+                      <th key={key} {...restColumn}>
+                        {column.render("Header")}
+                        <span>
+                          {column.isSorted
+                            ? column.isSortedDesc
+                              ? "↑"
+                              : "↓"
+                            : ""}
+                        </span>
+                      </th>
+                    );
+                  }
+                })}
+                <th>More info</th>
+              </tr>
+            );
+          })}
         </thead>
         <tbody {...getTableBodyProps()}>
           {rows.map(row => {
             prepareRow(row);
+            const {key, ...restRowProps} = row.getRowProps();
             return (
-              <tr {...row.getRowProps()}>
+              <tr key={key} {...restRowProps}>
                 {row.cells.map(cell => {
+                  const {key, ...restCellProps} = cell.getCellProps();
                   if (cell.column.Header === "Website") {
                     return (
-                      <td {...cell.getCellProps()}>
+                      <td key={key} {...restCellProps}>
                         <a href={cell.value} target="_blank">
                           <button>Visit School Site</button>
                         </a>
@@ -73,7 +77,9 @@ const SchoolTable = () => {
                     );
                   } else {
                     return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                      <td key={key} {...restCellProps}>
+                        {cell.render("Cell")}
+                      </td>
                     );
                   }
                 })}
@@ -89,14 +95,22 @@ const SchoolTable = () => {
           })}
         </tbody>
         <tfoot>
-          {footerGroups.map(footerGroup => (
-            <tr {...footerGroup.getFooterGroupProps}>
-              {footerGroup.headers.map(column => (
-                <td {...column.getFooterProps}>{column.render("Footer")}</td>
-              ))}
-              <td>More Info</td>
-            </tr>
-          ))}
+          {footerGroups.map(footerGroup => {
+            const {key, ...restFootProps} = footerGroup.getFooterGroupProps();
+            return (
+              <tr key={key} {...restFootProps}>
+                {footerGroup.headers.map(column => {
+                  const {key, ...restFooterCellProps} = column.getFooterProps();
+                  return (
+                    <td key={key} {...restFooterCellProps}>
+                      {column.render("Footer")}
+                    </td>
+                  );
+                })}
+                <td>More Info</td>
+              </tr>
+            );
+          })}
         </tfoot>
       </table>
     </div>
