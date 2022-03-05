@@ -1,7 +1,7 @@
 import React, {useMemo} from "react";
 import {COLUMNS} from "../dataset/columns";
 import SCHOOL_DATA from "../dataset/ma_schools.json";
-import {useTable, useSortBy} from "react-table";
+import {useTable, useSortBy, useGlobalFilter} from "react-table";
 
 const SchoolTable = () => {
   const columns = useMemo(() => COLUMNS, []);
@@ -63,6 +63,7 @@ const SchoolTable = () => {
               <tr {...row.getRowProps()}>
                 {row.cells.map(cell => {
                   if (cell.column.Header === "Website") {
+                    console.log(row.allCells[2].value);
                     return (
                       <td {...cell.getCellProps()}>
                         <a href={"http://" + cell.value} target="_blank">
@@ -77,7 +78,7 @@ const SchoolTable = () => {
                   }
                 })}
                 <td>
-                  <a href={"/school/"}>
+                  <a href={"/school/" + row.allCells[2].value}>
                     <button>See More</button>
                   </a>
                 </td>
