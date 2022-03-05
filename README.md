@@ -1,8 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Greetings Paperless Team!
 
-## Getting Started
-
-First, run the development server:
+This is a NEXT.js Application. To start the app you can run:
 
 ```bash
 npm run dev
@@ -10,25 +8,27 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## USER STORY
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- User can view a list of MA Colleges on index page
+- User can sort the list by School name or City
+- User can click 'visit school site' button to be taken to the school's website
+- User can click 'see more' to be taken to the view page for individual college
+- User can view more acceptance rate, average SAT scores and list of offered programs
+- User can click 'back to school list' to go back to home page
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Notes
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+I spent about 4 hours on this assessment. I wish I had a little more time but I have to leave for the weekend so this is all I could do for now.
 
-## Learn More
+I chose NEXT.js because I've had experience with it and it has a lot of features like file base routing out of the box that will help with a timed assessment. It also offers backend capability so if I had been faster I would have had the option.
 
-To learn more about Next.js, take a look at the following resources:
+I spent most of my time learning how to use the react-table library to render the table. It is a nice library that comes with a lot of functionality out of the box like the sorting that's being done in this app. So it was nice to learn something new for the assessment.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I would like to explore more of its features if I had the time. There are pagination features that I've yet to use. And there are search functionality built in also.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+I would also like to explore more on displaying all the information instead of the selected fews that I have chosen.
 
-## Deploy on Vercel
+I would also like to spend more time with styling. Some of the table items could have used some hover card feature to explain to the user in more details what it means.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Thank you so much for the opportunity and I look forward to discussing my solutions with you.
