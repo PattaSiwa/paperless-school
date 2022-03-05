@@ -15,11 +15,11 @@ const SchoolView = () => {
 
   const [school, setSchool] = useState({
     ADM_RATE: "0",
-    CITY: "",
-    INSTNM: "",
+    CITY: " ",
+    INSTNM: " ",
     PROGRAMS: [],
-    INSTURL: "",
-    SAT_AVG: "",
+    INSTURL: " ",
+    SAT_AVG: " ",
   });
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const SchoolView = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{school.INSTNM}</title>
+        <title>View Page</title>
         <meta
           name="description"
           content="Assessment for Paperless Parts Frontend Role by Thay Siwapornchai"
@@ -78,8 +78,8 @@ const SchoolView = () => {
               </tr>
             </thead>
             <tbody>
-              {school.PROGRAMS.map(course, index => (
-                <tr key={index}>
+              {school.PROGRAMS.map(course => (
+                <tr key={course}>
                   <td>{PROGRAMS[course]}</td>
                 </tr>
               ))}

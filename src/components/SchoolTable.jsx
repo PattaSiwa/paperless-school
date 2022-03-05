@@ -67,10 +67,14 @@ const SchoolTable = () => {
               <tr key={key} {...restRowProps}>
                 {row.cells.map(cell => {
                   const {key, ...restCellProps} = cell.getCellProps();
+
                   if (cell.column.Header === "Website") {
+                    const url = cell.value
+                      .replaceAll("https://", "")
+                      .replaceAll("/", "");
                     return (
                       <td key={key} {...restCellProps}>
-                        <a href={cell.value} target="_blank">
+                        <a href={url} target="_blank" rel="noreferrer">
                           <button>Visit School Site</button>
                         </a>
                       </td>
@@ -84,7 +88,15 @@ const SchoolTable = () => {
                   }
                 })}
                 <td>
-                  <Link href={"/school/" + row.allCells[2].value}>
+                  <Link
+                    href={
+                      "/school/" +
+                      row.allCells[2].value
+                        .replaceAll("https://", "")
+                        .replaceAll("/", "")
+                    }
+                    passHref
+                  >
                     <a>
                       <button>See More</button>
                     </a>
