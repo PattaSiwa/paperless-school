@@ -78,8 +78,8 @@ const SchoolView = () => {
               </tr>
             </thead>
             <tbody>
-              {school.PROGRAMS.map(course => (
-                <tr>
+              {school.PROGRAMS.map(course, index => (
+                <tr key={index}>
                   <td>{PROGRAMS[course]}</td>
                 </tr>
               ))}
