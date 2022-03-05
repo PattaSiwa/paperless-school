@@ -74,9 +74,10 @@ const SchoolTable = () => {
                     const url = cell.value
                       .replaceAll("https://", "")
                       .replaceAll("/", "");
+
                     return (
                       <td key={key} {...restCellProps}>
-                        <a href={url} target="_blank" rel="noreferrer">
+                        <a href={`http://` + url} target="_blank">
                           <button>Visit School Site</button>
                         </a>
                       </td>
