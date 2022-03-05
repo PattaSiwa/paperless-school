@@ -1,19 +1,26 @@
 import React, {useMemo} from "react";
 import {COLUMNS} from "../dataset/columns";
 import SCHOOL_DATA from "../dataset/ma_schools.json";
-import {useTable} from "react-table";
+import {useTable, useSortBy} from "react-table";
 
 const SchoolTable = () => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => SCHOOL_DATA, []);
 
-  const tableInstance = useTable({
-    columns,
-    data,
-  });
-
-  const {getTableProps, getTableBodyProps, headerGroups, rows, prepareRow} =
-    tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    footerGroups,
+    prepareRow,
+  } = useTable(
+    {
+      columns,
+      data,
+    },
+    useSortBy
+  );
 
   return (
     <div>
@@ -21,9 +28,30 @@ const SchoolTable = () => {
         <thead>
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
+              {headerGroup.headers.map(column => {
+                if (column.Header === "Website") {
+                  return (
+                    <th {...column.getHeaderProps()}>
+                      {column.render("Header")}
+                    </th>
+                  );
+                } else {
+                  return (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
+                      {column.render("Header")}
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? "↑"
+                            : "↓"
+                          : ""}
+                      </span>
+                    </th>
+                  );
+                }
+              })}
               <th>More info</th>
             </tr>
           ))}
@@ -34,12 +62,22 @@ const SchoolTable = () => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map(cell => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
+                  if (cell.column.Header === "Website") {
+                    return (
+                      <td {...cell.getCellProps()}>
+                        <a href={"http://" + cell.value} target="_blank">
+                          <button>Visit School Site</button>
+                        </a>
+                      </td>
+                    );
+                  } else {
+                    return (
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    );
+                  }
                 })}
                 <td>
-                  <a href="/">
+                  <a href={"/school/"}>
                     <button>See More</button>
                   </a>
                 </td>
@@ -47,6 +85,16 @@ const SchoolTable = () => {
             );
           })}
         </tbody>
+        <tfoot>
+          {footerGroups.map(footerGroup => (
+            <tr {...footerGroup.getFooterGroupProps}>
+              {footerGroup.headers.map(column => (
+                <td {...column.getFooterProps}>{column.render("Footer")}</td>
+              ))}
+              <td>More Info</td>
+            </tr>
+          ))}
+        </tfoot>
       </table>
     </div>
   );
