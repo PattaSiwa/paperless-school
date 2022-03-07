@@ -78,11 +78,12 @@ const SchoolView = () => {
               </tr>
             </thead>
             <tbody>
-              {school.PROGRAMS.map(course => (
-                <tr key={course}>
-                  <td>{PROGRAMS[course]}</td>
-                </tr>
-              ))}
+              {school.PROGRAMS &&
+                school.PROGRAMS.map(course => (
+                  <tr key={course}>
+                    <td>{PROGRAMS[course]}</td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
