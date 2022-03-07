@@ -1,12 +1,37 @@
-import React, {useMemo} from "react";
+import React, {useMemo, useState} from "react";
 import {COLUMNS} from "../dataset/columns";
 import SCHOOL_DATA from "../dataset/ma_schools.json";
 import Link from "next/link";
-import {useTable, useSortBy, useGlobalFilter} from "react-table";
+import {useTable, useSortBy} from "react-table";
 
 const SchoolTable = () => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => SCHOOL_DATA, []);
+
+  const schoolTemplate = {
+    CITY: "",
+    STABBR: "",
+    ADM_RATE: "",
+    ZIP: "",
+    HIGHDEG: "",
+    SAT_AVG: "",
+    LONGITUDE: "",
+    LATITUDE: "",
+    CCSIZSET: "",
+    INSTNM: "",
+    PROGRAMS: [],
+    INSTURL: "",
+  };
+
+  const [selectSchool, setSelectSchool] = useState(schoolTemplate);
+
+  const handleSetSchool = schoolData => {
+    const filteredSchool = SCHOOL_DATA.filter(
+      school => school.INSTNM === schoolData.INSTNM
+    );
+    setSelectSchool(filteredSchool);
+    console.log(selectSchool);
+  };
 
   const {
     getTableProps,
@@ -91,19 +116,9 @@ const SchoolTable = () => {
                   }
                 })}
                 <td>
-                  <Link
-                    href={
-                      "/school/" +
-                      row.allCells[2].value
-                        .replaceAll("https://", "")
-                        .replaceAll("/", "")
-                    }
-                    passHref
-                  >
-                    <a>
-                      <button>See More</button>
-                    </a>
-                  </Link>
+                  <button onClick={() => handleSetSchool(row.values)}>
+                    See More
+                  </button>
                 </td>
               </tr>
             );
