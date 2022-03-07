@@ -28,7 +28,16 @@ export const SchoolViewTable = () => {
   }
 
   if (!schoolData.INSTNM) {
-    return <div className={styles.center}>Something went wrong</div>;
+    return (
+      <div className={styles.center}>
+        <div className={styles.buttonContainer}>
+          <Link href="/">
+            <button className={styles.button}>Back to School List</button>
+          </Link>
+          <h1>Please go back and select a school</h1>
+        </div>
+      </div>
+    );
   }
 
   return (
