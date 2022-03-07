@@ -46,16 +46,17 @@ const SchoolTable = () => {
             return (
               <tr key={key} {...headerGroups}>
                 {headerGroup.headers.map(column => {
-                  const {key, ...restColumn} = column.getHeaderProps(
-                    column.getSortByToggleProps()
-                  );
                   if (column.Header === "Website") {
+                    const {key, ...restColumn} = column.getHeaderProps();
                     return (
                       <th key={key} {...restColumn}>
                         {column.render("Header")}
                       </th>
                     );
                   } else {
+                    const {key, ...restColumn} = column.getHeaderProps(
+                      column.getSortByToggleProps()
+                    );
                     return (
                       <th key={key} {...restColumn}>
                         {column.render("Header")}
